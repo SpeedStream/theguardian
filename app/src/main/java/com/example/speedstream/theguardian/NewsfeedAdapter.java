@@ -11,12 +11,10 @@ import java.util.ArrayList;
 
 /**
  * Created by speedstream on 17/04/17.
+ * Clase para mostrar las noticias de una seccion en particular
  */
 
 public class NewsfeedAdapter extends ArrayAdapter<News> {
-
-    private static final String LOG_TAG = NewsfeedAdapter.class.getSimpleName();
-
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
      * The context is used to inflate the layout file, and the list is the data we want
@@ -64,5 +62,4 @@ public class NewsfeedAdapter extends ArrayAdapter<News> {
 
         return listItemView;
     }
-
 }

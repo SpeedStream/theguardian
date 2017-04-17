@@ -23,8 +23,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
-    public static final String JSON_URL = "http://content.guardianapis.com/search?api-key=a8915dce-f35c-4cbf-8041-4de6f10ee8ca";
-    extractNews newsExtractor = new extractNews();
+    public static final String SECTIONS_URL = "http://content.guardianapis.com/sections?api-key=a8915dce-f35c-4cbf-8041-4de6f10ee8ca";
+    //extractNews newsExtractor = new extractNews();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,24 +35,13 @@ public class MainActivity extends AppCompatActivity{
         task.execute();
     }
 
-    private void updateUi(ArrayList<News> theNews) {
-        /*// Display the earthquake title in the UI
-        TextView titleTextView = (TextView) findViewById(R.id.title);
-        titleTextView.setText(earthquake.title);
-
-        // Display the earthquake date in the UI
-        TextView dateTextView = (TextView) findViewById(R.id.date);
-        dateTextView.setText(getDateString(earthquake.time));
-
-        // Display whether or not there was a tsunami alert in the UI
-        TextView tsunamiTextView = (TextView) findViewById(R.id.tsunami_alert);
-        tsunamiTextView.setText(getTsunamiAlertString(earthquake.tsunamiAlert));*/
-
-        NewsfeedAdapter flavorAdapter = new NewsfeedAdapter(this, theNews);
+    private void updateUi(ArrayList<News> sections) {
+        // Display the earthquake title in the UI
+        NewsSectionsAdapter sectionAdapter = new NewsSectionsAdapter(this, sections);
 
         // Get a reference to the ListView, and attach the adapter to the listView.
         ListView listView = (ListView) findViewById(R.id.listNews);
-        listView.setAdapter(flavorAdapter);
+        listView.setAdapter(sectionAdapter);
     }
 
     private class NewsAsyncTask extends AsyncTask<URL, Void, ArrayList<News>> {
@@ -61,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected ArrayList<News> doInBackground(URL... urls) {
             // Create URL object
-            URL url = createUrl(JSON_URL);
+            URL url = createUrl(SECTIONS_URL);
 
             // Perform HTTP request to the URL and receive a JSON response back
             String jsonResponse = "";
@@ -179,21 +168,16 @@ public class MainActivity extends AppCompatActivity{
                 JSONObject responseObj = baseJsonResponse.getJSONObject("response");
                 JSONArray resultsArray = responseObj.getJSONArray("results");
 
-                ArrayList<News> newsList = new ArrayList<>();
+                ArrayList<News> sectionsList = new ArrayList<>();
 
                 for(int i=0; i < resultsArray.length(); i++){
-                    JSONObject oneNews = resultsArray.getJSONObject(i);
+                    JSONObject section = resultsArray.getJSONObject(i);
 
-                    String sectionId = oneNews.getString("sectionId");
-                    String sectionName = oneNews.getString("sectionName");
-                    String publicationDate = oneNews.getString("webPublicationDate");
-                    String webTitle = oneNews.getString("webTitle");
-                    String webURL = oneNews.getString("webUrl");
-                    newsList.add(new News(sectionId, sectionName, publicationDate, webTitle, webURL));
+                    String sectionName = section.getString("webTitle");
+                    String apiUrl = section.getString("apiUrl");
+                    sectionsList.add(new News(sectionName, apiUrl));
                 }
-
-                return newsList;
-
+                return sectionsList;
             } catch (JSONException e) {
                 Log.e(LOG_TAG, "Problem parsing the earthquake JSON results", e);
             }

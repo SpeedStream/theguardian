@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by speedstream on 14/04/17.
  */
-
+/*
 public final class extractNews {
 
     public static ArrayList<News> getNewsFrom(String url){
@@ -44,3 +44,4 @@ public final class extractNews {
         return news;
     }
 }
+*/

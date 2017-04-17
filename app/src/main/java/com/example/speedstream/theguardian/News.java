@@ -5,23 +5,28 @@ package com.example.speedstream.theguardian;
  */
 
 public class News {
-    private String mSectionId;
     private String mSectionName;
     private String mPublicationDate;
     private String mWebTitle;
     private String mWebURL;
+    private String mSectionUrl;
 
-    public News(String sectionId, String sectionName, String publicationDate, String webTitle, String webURL){
-        mSectionId=sectionId;
-        mSectionName=sectionName;
-        mPublicationDate=publicationDate;
+    /*Used to show sections*/
+    public News(String sectionName, String sectionUrl){
+        mSectionName = sectionName;
+        mSectionUrl = sectionUrl;
+    }
+
+    /*Used to show news of one section*/
+    public News(String webTitle, String publicationDate, String webURL){
         mWebTitle=webTitle;
+        mPublicationDate=publicationDate;
         mWebURL=webURL;
     }
 
-    public String getmSectionId(){return mSectionId;}
     public String getmSectionName(){return mSectionName;}
     public String getmPublicationDate(){return mPublicationDate;}
     public String getmWebTitle(){return mWebTitle;}
-    public String getMwebURL(){return mWebURL;}
+    public String getmwebURL(){return mWebURL;}
+    public String getmSectionURL(){return mSectionUrl;}
 }
