@@ -13,12 +13,11 @@ import java.util.ArrayList;
  */
 
 public final class extractNews {
-    private  extractNews(){}
 
     public static ArrayList<News> getNewsFrom(String url){
         ArrayList<News> news = new ArrayList<>();
-        HttpHandler theHandler = new HttpHandler();
-        String jsonString = theHandler.makeServiceCall(url);
+        HttpHandler urlHandler = new HttpHandler();
+        String jsonString = urlHandler.makeServiceCall(url);
         Log.e("JSON_Response", "Tenemos respuesta de la URL: "+ jsonString);
         if(jsonString != null) {
             try{
@@ -42,6 +41,6 @@ public final class extractNews {
         else{
             Log.e("JSON_NULL", "JSONString null");
         }
-        return null;
+        return news;
     }
 }

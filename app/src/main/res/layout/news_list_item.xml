@@ -28,8 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
-            tools:text="Mar 6, 2010" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/time"
@@ -37,8 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
-            tools:text="3:00 PM" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -54,7 +52,6 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:gravity="center"
-            tools:text="Sports"
             />
 
         <TextView
@@ -62,8 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="fill_horizontal"
-            android:textColor="@android:color/black"
-            android:text="Joe Philbin helps Warrington show they can win tough at Widnes" />
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout
