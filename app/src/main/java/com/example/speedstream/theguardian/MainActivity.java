@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity{
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     public static final String SECTIONS_URL = "http://content.guardianapis.com/sections?api-key=a8915dce-f35c-4cbf-8041-4de6f10ee8ca";
-    //extractNews newsExtractor = new extractNews();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void updateUi(ArrayList<News> sections) {
-        // Display the earthquake title in the UI
+        // Display the sections title in the UI
         NewsSectionsAdapter sectionAdapter = new NewsSectionsAdapter(this, sections);
 
         // Get a reference to the ListView, and attach the adapter to the listView.
