@@ -18,7 +18,8 @@ public class News {
     }
 
     /*Used to show news of one section*/
-    public News(String webTitle, String publicationDate, String webURL){
+    public News(String sectionName, String webTitle, String publicationDate, String webURL){
+        mSectionName=sectionName;
         mWebTitle=webTitle;
         mPublicationDate=publicationDate;
         mWebURL=webURL;

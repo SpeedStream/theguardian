@@ -16,7 +16,7 @@ public final class extractNews {
 
     public static ArrayList<News> getNewsFrom(String url){
         ArrayList<News> news = new ArrayList<>();
-        HttpHandler urlHandler = new HttpHandler();
+        SomeConnections urlHandler = new SomeConnections();
         String jsonString = urlHandler.makeServiceCall(url);
         Log.e("JSON_Response", "Tenemos respuesta de la URL: "+ jsonString);
         if(jsonString != null) {
