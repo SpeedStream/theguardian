@@ -1,6 +1,7 @@
 package com.example.speedstream.theguardian;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
  */
 
 public class NewsSectionsAdapter extends ArrayAdapter<News> {
-    private static String APIKEY = "?api-key=a8915dce-f35c-4cbf-8041-4de6f10ee8ca";
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
      * The context is used to inflate the layout file, and the list is the data we want
@@ -24,13 +24,15 @@ public class NewsSectionsAdapter extends ArrayAdapter<News> {
      * @param context   The current context. Used to inflate the layout file.
      * @param sections  A list of sections objects to display in a list
      */
+    private static Activity whereActivityIcameFrom = null;
     public NewsSectionsAdapter(Activity context, ArrayList<News> sections) {
             // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
             // the second argument is used when the ArrayAdapter is populating a single TextView.
             // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
             // going to use this second argument, so it can be any value. Here, we used 0.
             super(context, 0, sections);
-            }
+            whereActivityIcameFrom = context;
+    }
 
     /**
      * Provides a view for an AdapterView (ListView, GridView, etc.)
@@ -58,7 +60,10 @@ public class NewsSectionsAdapter extends ArrayAdapter<News> {
         sectionURL.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                System.out.println(currentSection.getmSectionURL()+APIKEY);
+                System.out.println(currentSection.getmSectionURL());
+                Intent ActSectionNews= new Intent(whereActivityIcameFrom, ActivitySectionNews.class);
+                ActSectionNews.putExtra("sectionURL", currentSection.getmSectionURL());
+                whereActivityIcameFrom.startActivity(ActSectionNews);
             }
         });
         return listItemView;

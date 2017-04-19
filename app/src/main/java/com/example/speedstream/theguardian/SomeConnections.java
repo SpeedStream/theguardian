@@ -19,8 +19,6 @@ import static com.example.speedstream.theguardian.MainActivity.LOG_TAG;
  */
 
 public class SomeConnections {
-    private static final String TAG = SomeConnections.class.getSimpleName();
-
 
     /**
     *   Convert the {@link InputStream} into a String which contains the

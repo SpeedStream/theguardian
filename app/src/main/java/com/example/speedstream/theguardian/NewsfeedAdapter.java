@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class NewsfeedAdapter extends ArrayAdapter<News> {
                     R.layout.news_list_item, parent, false);
         }
 
-        News currentNews = getItem(position);
+        final News currentNews = getItem(position);
 
         TextView sectionTextView = (TextView) listItemView.findViewById(R.id.Section);
         sectionTextView.setText(currentNews.getmSectionName());
@@ -59,6 +60,14 @@ public class NewsfeedAdapter extends ArrayAdapter<News> {
 
         TextView newsTitleTextView = (TextView) listItemView.findViewById(R.id.Title);
         newsTitleTextView.setText(currentNews.getmWebTitle());
+
+        ImageView sectionURL = (ImageView) listItemView.findViewById(R.id.imageView);
+        sectionURL.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                System.out.println(currentNews.getmwebURL());
+            }
+        });
 
         return listItemView;
     }
