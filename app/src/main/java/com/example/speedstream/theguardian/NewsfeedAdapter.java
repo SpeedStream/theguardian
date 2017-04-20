@@ -1,11 +1,15 @@
 package com.example.speedstream.theguardian;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +20,8 @@ import java.util.ArrayList;
  */
 
 public class NewsfeedAdapter extends ArrayAdapter<News> {
+
+    Activity theContext = null;
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
      * The context is used to inflate the layout file, and the list is the data we want
@@ -30,6 +36,7 @@ public class NewsfeedAdapter extends ArrayAdapter<News> {
         // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
         // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, newsFeed);
+        theContext = context;
     }
 
     /**
@@ -52,20 +59,23 @@ public class NewsfeedAdapter extends ArrayAdapter<News> {
 
         final News currentNews = getItem(position);
 
-        TextView sectionTextView = (TextView) listItemView.findViewById(R.id.Section);
-        sectionTextView.setText(currentNews.getmSectionName());
-
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
         dateTextView.setText(currentNews.getmPublicationDate());
 
         TextView newsTitleTextView = (TextView) listItemView.findViewById(R.id.Title);
         newsTitleTextView.setText(currentNews.getmWebTitle());
 
-        ImageView sectionURL = (ImageView) listItemView.findViewById(R.id.imageView);
-        sectionURL.setOnClickListener(new View.OnClickListener(){
+        final LinearLayout openInBrowser = (LinearLayout) listItemView.findViewById(R.id.readArticle);
+        openInBrowser.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                System.out.println(currentNews.getmwebURL());
+                Log.e("currentNews", currentNews.getmwebURL());
+                String url = currentNews.getmwebURL();
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent();
+                intent.setData(uri);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                theContext.startActivity(intent);
             }
         });
 

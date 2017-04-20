@@ -11,6 +11,12 @@ public class News {
     private String mWebURL;
     private String mSectionUrl;
 
+    public News() {
+        /**
+         * Used only to retrive data directly.
+         * */
+    }
+
     /*Used to show sections*/
     public News(String sectionName, String sectionUrl){
         mSectionName = sectionName;

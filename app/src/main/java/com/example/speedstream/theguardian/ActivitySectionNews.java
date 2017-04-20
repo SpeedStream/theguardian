@@ -20,8 +20,8 @@ public class ActivitySectionNews extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         internalApiURI = getIntent().getStringExtra("sectionURL")+API_KEY;      //Recover URL parsed from newsSectionAdapter
-
         super.onCreate(savedInstanceState);
+        setTitle(getIntent().getStringExtra("sectionName"));    //Recover sectionName parsed from newsSectionAdapter
         setContentView(R.layout.activity_section_news);
         NewsAsyncTask task = new NewsAsyncTask();
         task.execute();

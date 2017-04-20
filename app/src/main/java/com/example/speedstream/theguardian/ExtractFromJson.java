@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by speedstream on 18/04/17.
@@ -32,8 +33,6 @@ public class ExtractFromJson {
                 Log.i("ExtractNews", "-> main");
                 for (int i = 0; i < resultsArray.length(); i++) {
                     JSONObject section = resultsArray.getJSONObject(i);
-                    //String sectionName = section.getString("webTitle");
-                    //String apiUrl = section.getString("apiUrl");
                     sectionsList.add(new News(section.getString("webTitle"), section.getString("apiUrl")));
                 }
             }else if (whichFeed=="section"){
@@ -43,10 +42,10 @@ public class ExtractFromJson {
                     JSONObject section = resultsArray.getJSONObject(i);
 
                     String sectionName = section.getString("sectionName");
-                    String publicationDate = section.getString("webPublicationDate");
+                    String date = getCustomDate(section.getString(("webPublicationDate")));
                     String title = section.getString("webTitle");
                     String webUrl = section.getString("webUrl");
-                    sectionsList.add(new News(sectionName, title, publicationDate,webUrl));
+                    sectionsList.add(new News(sectionName, title, date,webUrl));
                 }
             }
             else{
@@ -57,5 +56,23 @@ public class ExtractFromJson {
             Log.e("JSON_ERROR", "Problem parsing the JSON results", e);
         }
         return null;
+    }
+
+    private String getCustomDate(String webDate){
+        /**
+         * The webPublicationDate came as the following format -> 2017-04-18T15:27:59Z
+         * So, in this function, we use split(key) to divide the original string at key position.
+         * "date" divides the original string into "2017-04-18" and "15:27:59Z". We only focus on date[0], "2017-04-18"
+         * Next, split the string date[0] at "-" to obtain
+         *      year    (date[0])
+         *      month   (date[1])
+         *      day     (date[2])
+         * and reorganize them in finalDate as "day/month/year".
+         * Finally, return finalDate as the customDate
+         * */
+        String[] date = webDate.split("T");
+        String[] dateParts = date[0].split("-");
+        String finalDate = dateParts[2]+"/"+dateParts[1]+"/"+dateParts[0];
+        return finalDate;
     }
 }
