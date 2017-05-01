@@ -19,8 +19,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Kick off an {@link AsyncTask} to perform the network request
-        NewsAsyncTask task = new NewsAsyncTask();
-        task.execute();
+        /*NewsAsyncTask task = new NewsAsyncTask();
+        task.execute();*/
+        new NewsAsyncTask().execute();
     }
 
     private void updateUi(ArrayList<News> sections) {

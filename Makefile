@@ -1,5 +1,5 @@
 git :
 	$ git add .
 	$ git add -A
-	$ git commit -m "Section visor added"
+	$ git commit -m "Last functional Version - Before Loaders"
 	$ git push origin master
